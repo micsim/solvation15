@@ -2,7 +2,7 @@ package de.gwvprojekt.algorithm;
 
 public abstract class State implements Comparable<State>
 {
-	static State completedState = null;
+	static State COMPLETED_STATE = null;
 
 	public abstract int   getValue(int row, int column);
 	public abstract int[] getPos(int value);

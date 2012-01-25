@@ -5,20 +5,41 @@ import java.util.HashSet;
 import java.util.PriorityQueue;
 
 public class AStar{
-	private State start;
+	private State     start;
 	private Heuristic heuristic;
+	private Node  	  goalNode;
 	
-	public AStar(Heuristic h){
-		start = State.completedState;
+	public AStar(State startState, Heuristic h){
+		start = startState;
 		heuristic = h;
+		goalNode = new NodeImpl(heuristic.calculateFor(start), start, null, 0);
 	}
 	
-	public int getHintDirection(State currentState){
-		Node gn = getGoalNode(currentState);
-		return State.inverseDirection(gn.getDirection());
+	public boolean findPath(State currentState){
+		goalNode = getGoalNode(currentState);
+		
+		return goalNode != null;
 	}
 	
-	public Node getGoalNode(State goal){
+	public void move(int direction){
+		if(direction == State.inverseDirection(goalNode.getDirection()))
+			goalNode = goalNode.getPredecessor();
+		else
+			goalNode = getGoalNode(goalNode.getState().move(direction));
+	}
+	
+	public int getHintDirection(){
+		if(goalNode == null)
+			return 0;
+		else
+			return State.inverseDirection(goalNode.getDirection());
+	}
+	
+	public State getState(){
+		return goalNode.getState();
+	}
+	
+	private Node getGoalNode(State goal){
 		PriorityQueue<Node> frontier = new PriorityQueue<Node>();
 		frontier.add(new NodeImpl(heuristic.calculateFor(start), start, null, 0));
 		
