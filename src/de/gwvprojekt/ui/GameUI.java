@@ -16,11 +16,14 @@ public class GameUI
 	private JPanel _submainframe;
 	private JPanel _matrixframe;
 	private JPanel _buttonframe;
+	private JPanel _southernTextframe;
 	
 	private JButton[] _squares;
 	private JButton _initializeButton;
 	private JButton _hintButton;
+	private JButton _solveButton;
 	private JLabel _hintBar;
+	private JLabel _hintBar2;
 	
 	// Data + Algorithm
 	private Data _data;
@@ -29,8 +32,10 @@ public class GameUI
 	// some Constants
 	private final String HINT = "Hint";
 	private final String INIT = "Initialize";
+	private final String SOLVE = "Solve";
 	
 	
+	@SuppressWarnings("deprecation")
 	public GameUI(Data data)//, Algorithm alg)
 	{
 		_data = data;
@@ -41,9 +46,12 @@ public class GameUI
 		_submainframe = new JPanel();
 		_matrixframe = new JPanel();
 		_buttonframe = new JPanel();
+		_southernTextframe = new JPanel();
 		_initializeButton = new JButton(INIT);
 		_hintButton = new JButton(HINT);
-		_hintBar = new JLabel("Dieser Text ist (noch) keine Hilfe! :(");
+		_solveButton = new JButton(SOLVE);
+		_hintBar = new JLabel("(>'-')>");
+		_hintBar2 = new JLabel("Dieser Text ist (noch) keine Hilfe! <('-'<)");
 		
 		for (int i = 0; i < 16; i++)
 		{
@@ -53,10 +61,13 @@ public class GameUI
 		_mainframe.setLayout(new BorderLayout());
 		_submainframe.setLayout(new BorderLayout());
 		_matrixframe.setLayout(new GridLayout(4,4));
-		_buttonframe.setLayout(new GridLayout(2,1));
+		_buttonframe.setLayout(new GridLayout(3,1));
+		_southernTextframe.setLayout(new GridLayout(2,1));
 		
 		_mainframe.add(_submainframe, BorderLayout.CENTER);
-		_mainframe.add(_hintBar, BorderLayout.SOUTH);
+		_mainframe.add(_southernTextframe, BorderLayout.SOUTH);
+		_southernTextframe.add(_hintBar);
+		_southernTextframe.add(_hintBar2);
 		
 		_submainframe.add(_matrixframe, BorderLayout.CENTER);
 		_submainframe.add(_buttonframe, BorderLayout.EAST);
@@ -68,13 +79,11 @@ public class GameUI
 		
 		_buttonframe.add(_initializeButton);
 		_buttonframe.add(_hintButton);
+		_buttonframe.add(_solveButton);
 		
 		updateUI();
 		_mainframe.pack();
 		_mainframe.show();
-		
-		
-		//System.out.println("Olé!");
 	}
 	
 	public void updateUI()
@@ -108,5 +117,35 @@ public class GameUI
 			}
 		}
 		_mainframe.repaint();
+	}
+
+	public JLabel getHintLabel()
+	{
+		return _hintBar;
+	}
+	
+	public JLabel getHintLabel2()
+	{
+		return _hintBar2;
+	}
+	
+	public JButton getMatrixButtons(int index)
+	{
+		return _squares[index];
+	}
+	
+	public JButton getHintButton()
+	{
+		return _hintButton;
+	}
+	
+	public JButton getInitButton()
+	{
+		return _initializeButton;
+	}
+	
+	public JButton getSolveButton()
+	{
+		return _solveButton;
 	}
 }
