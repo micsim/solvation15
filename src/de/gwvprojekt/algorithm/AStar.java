@@ -7,6 +7,7 @@ import java.util.PriorityQueue;
 public class AStar implements Algorithm{
 	private Heuristic heuristic;
 	private Node  	  goalNode;
+	int[]             directions;
 	
 	public AStar(Heuristic h){
 		heuristic = h;
@@ -14,18 +15,19 @@ public class AStar implements Algorithm{
 	
 	public boolean findPath(State startState) throws CloneNotSupportedException{
 		goalNode = getGoalNode(startState);
+		calculateDirections();
 		
 		return goalNode != null;
 	}
 	
 	public void move(int direction) throws CloneNotSupportedException{
-		if(direction == AStar.inverseDirection(goalNode.getDirection()))
+		if(direction == directions[0])
 			goalNode = goalNode.getPredecessor();
 		else
 			goalNode = getGoalNode(goalNode.getState().move(direction));
 	}
 	
-	public int[] getDirections(){
+	public void calculateDirections(){
 		int length = 0;
 		Node current = goalNode;
 		
@@ -34,15 +36,13 @@ public class AStar implements Algorithm{
 			current = current.getPredecessor();
 		}
 		
-		int[] directions = new int[length];
+		directions = new int[length];
 		current = goalNode;
 		
 		for(int i=1;i<=length;i++){
 			directions[length - i] = current.getDirection();
 			current = current.getPredecessor();
 		}
-		
-		return directions;
 	}
 	
 	public State getState(){
@@ -81,21 +81,13 @@ public class AStar implements Algorithm{
 		return null;
 	}
 
-	public static int inverseDirection(int direction){
-		if(direction > 0 && direction < 5)
-			return 5 - direction;
-		else
-			return 0;
-	}
-
 	@Override
 	public String getHintString() {
-		return directionText(getDirections()[0]);
+		return directionText(directions[0]);
 	}
 
 	@Override
 	public String getSolveString() {		
-		int[] directions = getDirections();
 		if(directions.length == 0)
 			return "";
 		else{
