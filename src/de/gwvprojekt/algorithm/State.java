@@ -1,14 +1,18 @@
 package de.gwvprojekt.algorithm;
 
-import java.util.Collection;
-
-public interface State extends Comparable<State>
+public abstract class State implements Comparable<State>
 {
-	public int getValue(int row, int column);
-	public int[] getPos(int value);
-	public void move(int row, int column);
-	public boolean isMovable(int row, int column);
-	public void initializeData();
+	static State completedState = null;
+
+	public abstract int   getValue(int row, int column);
+	public abstract int[] getPos(int value);
+	public abstract State move(int direction); // 1 -> up, 2 -> left, 3 -> right, 4 -> down
+	public abstract int[] getPossibleDirections();
 	
-	public Collection<State> getNeighbors();
+	public static int inverseDirection(int direction){
+		if(direction > 0 && direction < 5)
+			return 5 - direction;
+		else
+			return 0;
+	}
 }

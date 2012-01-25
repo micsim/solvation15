@@ -4,11 +4,13 @@ public class NodeImpl implements Node {
 	int estimatedCost;
 	State state;
 	Node predecessor;
+	int moveDirection;
 	
-	public NodeImpl(int ec, State s, Node p){
+	public NodeImpl(int ec, State s, Node p, int direction){
 		estimatedCost = ec;
 		state = s;
 		predecessor = p;
+		moveDirection = direction;
 	}
 
 	public int compareTo(Node o) {
@@ -34,5 +36,9 @@ public class NodeImpl implements Node {
 
 	public Node getPredecessor() {
 		return predecessor;
+	}
+
+	public int getDirection() {
+		return moveDirection;
 	}
 }
