@@ -9,6 +9,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import de.gwvprojekt.algorithm.State;
+
 public class GameUI
 {
 	// Swing-Shit
@@ -26,7 +28,7 @@ public class GameUI
 	private JLabel _hintBar2;
 	
 	// Data + Algorithm
-	private Data _data;
+	private State _data;
 	//private Algorithm _alg;
 	
 	// some Constants
@@ -39,7 +41,7 @@ public class GameUI
 	 * @param data
 	 */
 	@SuppressWarnings("deprecation")
-	public GameUI(Data data)//, Algorithm alg)
+	public GameUI(State data)//, Algorithm alg)
 	{
 		_data = data;
 		//_alg = alg;

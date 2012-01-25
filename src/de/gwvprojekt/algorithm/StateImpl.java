@@ -1,6 +1,110 @@
 package de.gwvprojekt.algorithm;
 
-public class StateImpl extends DataImpl implements State{
+import java.util.Random;
+
+public class StateImpl implements State, Cloneable{
+	// Felder
+	private int[][] _matrix;
+	private Random _random;
+	
+	/**
+	 * Konstruktor der Klasse DataImpl, die das Interface Data implementiert
+	 */
+	public StateImpl()
+	{
+		_matrix = new int[4][4];
+		_random = new Random();
+		initializeData();
+	}
+	
+	@Override
+	public String getStringValue(int row, int column)
+	{
+		return ""+_matrix[row][column];
+	}
+
+	@Override
+	public void move(int row, int column)
+	{
+		if(isMovable(row, column))
+		{
+			int[] pos16 = get16Position();
+			swap(row, column, pos16[0], pos16[1]);
+		}
+	}
+
+	@Override
+	public boolean isMovable(int row, int column)
+	{
+		boolean result = false;
+		int[] pos16 = get16Position();		
+		if((pos16[0]-1 == row && pos16[1] == column)
+				||(pos16[0]+1 == row && pos16[1] == column)
+				||(pos16[0] == row && pos16[1]-1 == column)
+				||(pos16[0] == row && pos16[1]+1 == column))
+		{
+			result = true;
+		}
+		return result;
+	}
+
+	@Override
+	public void initializeData()
+	{
+		int a = 1;
+		
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				//System.out.println(a);
+				_matrix[i][j] = a;
+				a++;
+			}
+		}
+	}
+	
+	public void randomizeData(){
+		_random.setSeed(System.nanoTime());
+
+		int swapnumber = 50; 
+		for (int i = 0; i < swapnumber; i++)
+		{
+			int a1, a2, b1, b2;
+			do{
+				a1 = _random.nextInt(4);
+				a2 = _random.nextInt(4);
+				b1 = _random.nextInt(4);
+				b2 = _random.nextInt(4);
+			}while((a1==b1)&&(a2==b2));
+			
+			swap(a1,a2,b1,b2);
+		}
+	}
+	
+	public int getValue(int row, int column) {
+		return _matrix[row][column];
+	}
+
+	public int[] getPos(int value)
+	{
+		int[] result = new int[2];
+		
+		for(int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				if(_matrix[i][j] == value)
+				{
+					result[0] = i;
+					result[1] = j;
+					return result;
+				}
+			}
+		}
+		return null;
+	}
+
 	@Override
 	public State move(int direction) throws CloneNotSupportedException {
 		int[] tile_pos = getPos(16);
@@ -70,5 +174,30 @@ public class StateImpl extends DataImpl implements State{
 			int[] arr = {1, 2, 4}; // Up, down or left.
 			return arr;
 		}
+	}
+	
+	
+	/**
+	 * Vertausch die Matrixfelder [a1][a2] mit dem Feld [b1][b2]
+	 * @param a1
+	 * @param a2
+	 * @param b1
+	 * @param b2
+	 */
+	private void swap(int a1, int a2, int b1, int b2)
+	{
+		int c;
+		c = _matrix[a1][a2];
+		_matrix[a1][a2] = _matrix[b1][b2];
+		_matrix[b1][b2] = c;
+	}
+	
+	/**
+	 * Liefert die Position des leeren Feldes.
+	 * @return
+	 */
+	private int[] get16Position()
+	{
+		return getPos(16);
 	}
 }
