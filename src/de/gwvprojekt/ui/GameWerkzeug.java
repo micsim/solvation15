@@ -22,13 +22,6 @@ public class GameWerkzeug
 		_alg = alg;
 		_ui = new GameUI(_data);
 		addActions();
-		
-		try {
-			_alg.findPath(_data);
-		} catch (CloneNotSupportedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 	
 	/**
@@ -56,6 +49,13 @@ public class GameWerkzeug
 					@Override
 					public void actionPerformed(ActionEvent e)
 					{
+						try {
+							_alg.findPath(_data);
+						} catch (CloneNotSupportedException ex) {
+							// TODO Auto-generated catch block
+							ex.printStackTrace();
+						}
+
 						String text = _alg.getHintString();
 						
 						_ui.getHintLabel().setText("Hint:");
@@ -71,6 +71,14 @@ public class GameWerkzeug
 					@Override
 					public void actionPerformed(ActionEvent e)
 					{
+						
+						try {
+							_alg.findPath(_data);
+						} catch (CloneNotSupportedException ex) {
+							// TODO Auto-generated catch block
+							ex.printStackTrace();
+						}
+
 						String text = _alg.getSolveString();
 						
 						_ui.getHintLabel().setText("How to solve:");
