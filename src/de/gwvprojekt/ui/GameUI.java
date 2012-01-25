@@ -34,7 +34,10 @@ public class GameUI
 	private final String INIT = "Initialize";
 	private final String SOLVE = "Solve";
 	
-	
+	/**
+	 * Konstruktor der Klasse GameUI
+	 * @param data
+	 */
 	@SuppressWarnings("deprecation")
 	public GameUI(Data data)//, Algorithm alg)
 	{
@@ -86,6 +89,9 @@ public class GameUI
 		_mainframe.show();
 	}
 	
+	/**
+	 * Funktion um die UI zu aktualisieren 
+	 */
 	public void updateUI()
 	{
 		int a = 0;
@@ -119,31 +125,56 @@ public class GameUI
 		_mainframe.repaint();
 	}
 
+	/**
+	 * Liefert das 1te HintLabel
+	 * @return _hintbar
+	 */
 	public JLabel getHintLabel()
 	{
 		return _hintBar;
 	}
 	
+	/**
+	 * Liefert das 2te HintLabel
+	 * @return _hintBar2
+	 */
 	public JLabel getHintLabel2()
 	{
 		return _hintBar2;
 	}
 	
+	/**
+	 * Liefert das Feld des Spielfeldes an der Stelle index
+	 * @param index
+	 * @return _squares[index]
+	 */
 	public JButton getMatrixButtons(int index)
 	{
 		return _squares[index];
 	}
 	
+	/**
+	 * Liefert den HintButton
+	 * @return _hintButton
+	 */
 	public JButton getHintButton()
 	{
 		return _hintButton;
 	}
 	
+	/**
+	 * Liefert den InitButton
+	 * @return _initializeButton
+	 */
 	public JButton getInitButton()
 	{
 		return _initializeButton;
 	}
 	
+	/**
+	 * Liefert den SolveButton
+	 * @return _solveButton
+	 */
 	public JButton getSolveButton()
 	{
 		return _solveButton;

@@ -5,11 +5,15 @@ import java.awt.event.ActionListener;
 
 public class GameWerkzeug
 {
+	//Felder
 	private GameUI _ui;
 	private Data _data;
 	//private Algorithm _alg;
 	
-	
+	/**
+	 * Konstruktor der Klasse Gamewerkzeug
+	 * @param data
+	 */
 	public GameWerkzeug(Data data)//, Algorithm alg)
 	{
 		_data = data;
@@ -18,8 +22,12 @@ public class GameWerkzeug
 		addActions();
 	}
 	
+	/**
+	 * Hängt ActionListener an die Labels und Buttons der GUI
+	 */
 	private void addActions()
 	{
+		// InitButton
 		_ui.getInitButton().addActionListener(
 				new ActionListener()
 					{
@@ -30,6 +38,8 @@ public class GameWerkzeug
 							_ui.updateUI();
 						}
 					});
+		
+		// HintButton
 		_ui.getHintButton().addActionListener(
 				new ActionListener()
 				{
@@ -43,6 +53,7 @@ public class GameWerkzeug
 					}
 				});
 		
+		// SolveButton
 		_ui.getSolveButton().addActionListener(
 				new ActionListener()
 				{
@@ -56,6 +67,7 @@ public class GameWerkzeug
 					}
 				});
 		
+		// Spielfelder
 		for (int i = 0; i < 16; i++)
 		{
 			final int a = i;
