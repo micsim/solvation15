@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.PriorityQueue;
 
-public class AStar{
+public class AStar implements Algorithm{
 	private State     start;
 	private Heuristic heuristic;
 	private Node  	  goalNode;
