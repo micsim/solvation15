@@ -13,7 +13,7 @@ public class StartUp
 	public static void main(String[] args)
 	{
 		State data = new StateImpl();
-		data.randomizeData();
+		//data.randomizeData();
 		
 		Algorithm alg = new AStar(new HeuristicCountImpl());
 		

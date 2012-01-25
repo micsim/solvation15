@@ -17,6 +17,11 @@ public class StateImpl implements State, Cloneable{
 		initializeData();
 	}
 	
+	public StateImpl(int[][] matrix){
+		_matrix = matrix;
+		_random = new Random();
+	}
+	
 	@Override
 	public String getStringValue(int row, int column)
 	{
@@ -132,6 +137,36 @@ public class StateImpl implements State, Cloneable{
 	
 	public State goalState(){
 		return new StateImpl();
+	}
+	
+	@Override
+	public boolean equals(Object o){
+		if(o instanceof StateImpl){
+			int[][] otherMatrix = ((StateImpl) o)._matrix;
+			
+			for (int i = 0; i < 4; i++)
+			{
+				for (int j = 0; j < 4; j++)
+				{
+					if(_matrix[i][j] != otherMatrix[i][j]){
+						return false;
+					}
+				}
+			}
+			
+			return true;
+		}else
+			return super.equals(o);
+	}
+	
+	@Override
+	public Object clone() throws CloneNotSupportedException{
+		int[][] newMatrix = new int[4][];
+		for(int i=0;i<4;i++){
+			newMatrix[i] = _matrix[i].clone();
+		}
+		
+		return new StateImpl(newMatrix);
 	}
 
 	@Override

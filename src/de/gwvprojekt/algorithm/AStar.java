@@ -36,6 +36,9 @@ public class AStar implements Algorithm{
 			current = current.getPredecessor();
 		}
 		
+		if(length > 0)
+			length--;
+		
 		directions = new int[length];
 		current = goalNode;
 		
@@ -82,8 +85,11 @@ public class AStar implements Algorithm{
 	}
 
 	@Override
-	public String getHintString() {
-		return directionText(directions[0]);
+	public String getHintString(){
+		if(directions.length == 0)
+			return "";
+		else
+			return directionText(directions[0]);
 	}
 
 	@Override
