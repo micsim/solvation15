@@ -15,13 +15,13 @@ public class AStar implements Algorithm{
 		goalNode = new NodeImpl(heuristic.calculateFor(start), start, null, 0);
 	}
 	
-	public boolean findPath(State currentState){
+	public boolean findPath(State currentState) throws CloneNotSupportedException{
 		goalNode = getGoalNode(currentState);
 		
 		return goalNode != null;
 	}
 	
-	public void move(int direction){
+	public void move(int direction) throws CloneNotSupportedException{
 		if(direction == AStar.inverseDirection(goalNode.getDirection()))
 			goalNode = goalNode.getPredecessor();
 		else
@@ -39,7 +39,7 @@ public class AStar implements Algorithm{
 		return goalNode.getState();
 	}
 	
-	private Node getGoalNode(State goal){
+	private Node getGoalNode(State goal) throws CloneNotSupportedException{
 		PriorityQueue<Node> frontier = new PriorityQueue<Node>();
 		frontier.add(new NodeImpl(heuristic.calculateFor(start), start, null, 0));
 		
