@@ -33,6 +33,7 @@ public class StateImpl implements State, Cloneable{
 	{
 		if(isMovable(row, column))
 		{
+
 			int[] pos16 = get16Position();
 			swap(row, column, pos16[0], pos16[1]);
 		}
@@ -41,6 +42,12 @@ public class StateImpl implements State, Cloneable{
 	@Override
 	public boolean isMovable(int row, int column)
 	{
+		boolean isOutOfBounds = !(row >= 0 && row <= 3 && column >= 0 && column <= 3);
+		assert !isOutOfBounds : "Out of bounds!";
+		// TODO Why does the above assert not work?
+		if(isOutOfBounds)
+			return false;
+		
 		boolean result = false;
 		int[] pos16 = get16Position();		
 		if((pos16[0]-1 == row && pos16[1] == column)
@@ -187,7 +194,7 @@ public class StateImpl implements State, Cloneable{
 				return arr;
 			}else{
 				// Upper right corner.
-				int[] arr = {2, 3}; // Left or down.
+				int[] arr = {3, 4}; // Left or down.
 				return arr;
 			}
 		}else if(pos[0] == 3){
@@ -201,7 +208,7 @@ public class StateImpl implements State, Cloneable{
 				return arr;
 			}else{
 				// Lower right corner.
-				int[] arr = {2, 3}; // Left or up.
+				int[] arr = {1, 2}; // Left or up.
 				return arr;
 			}
 		}else if(pos[1] == 0){
