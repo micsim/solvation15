@@ -78,9 +78,25 @@ public class AStar implements Algorithm{
 
 	@Override
 	public String getHintString() {
+		return directionText(getHintDirection());
+	}
+
+	@Override
+	public String getSolveString() {
+		String text = "";
+		
+		Node currentNode = goalNode;
+		while(currentNode != null){
+			text += ", " + directionText(inverseDirection(currentNode.getDirection()));
+		}
+		
+		return text;
+	}
+	
+	private static String directionText(int direction){
 		String text;
 		
-		switch(getHintDirection()){
+		switch(direction){
 		case 1:
 			text = "Up";
 			break;

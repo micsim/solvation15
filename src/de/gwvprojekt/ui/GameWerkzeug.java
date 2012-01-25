@@ -71,7 +71,8 @@ public class GameWerkzeug
 					@Override
 					public void actionPerformed(ActionEvent e)
 					{
-						String text = ""+System.nanoTime(); //TODO Mit Algorithmus verknüpfen
+						String text = _alg.getSolveString();
+						
 						_ui.getHintLabel().setText("How to solve:");
 						_ui.getHintLabel2().setText(text);
 						_ui.updateUI();

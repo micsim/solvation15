@@ -5,5 +5,6 @@ public interface Algorithm {
 	public State   getState();
 	public int     getHintDirection(); // 1 -> up, 2 -> left, 3 -> right, 4 -> down
 	public String  getHintString();
+	public String  getSolveString();
 	public void    move(int direction) throws CloneNotSupportedException;
 }
