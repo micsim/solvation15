@@ -19,7 +19,7 @@ public class StartUp
 		State data = new StateImpl();
 		data.randomizeData();
 		
-		Algorithm alg = new AStar(new StateImpl(), new HeuristicImpl());
+		Algorithm alg = new AStar(new HeuristicImpl());
 		
 		GameWerkzeug _game = new GameWerkzeug(data, alg);
 	}

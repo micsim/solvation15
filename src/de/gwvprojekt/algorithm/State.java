@@ -16,7 +16,7 @@ public interface State
 	 */
 	public String getStringValue(int row, int column);
 
-	public abstract State move(int direction) throws CloneNotSupportedException; // 1 -> up, 2 -> left, 3 -> right, 4 -> down
+	public State move(int direction) throws CloneNotSupportedException; // 1 -> up, 2 -> left, 3 -> right, 4 -> down
 
 	/**
 	 * vertauscht das leere Feld mit dem angegebenen Feld, falls dies möglich ist
@@ -37,4 +37,6 @@ public interface State
 	 * Initialisiert die Matrix mit einer Permutation
 	 */
 	public void initializeData();
+	
+	public State goalState();
 }

@@ -129,6 +129,10 @@ public class StateImpl implements State, Cloneable{
 		
 		return state;
 	}
+	
+	public State goalState(){
+		return new StateImpl();
+	}
 
 	@Override
 	public int[] getPossibleDirections() {
