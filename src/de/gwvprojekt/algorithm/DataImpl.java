@@ -6,10 +6,13 @@ import de.gwvprojekt.ui.Data;
 
 public class DataImpl implements Data
 {
+	// Felder
 	private int[][] _matrix;
 	private Random _random;
 	
-
+	/**
+	 * Konstruktor der Klasse DataImpl, die das Interface Data implementiert
+	 */
 	public DataImpl()
 	{
 		_matrix = new int[4][4];
@@ -103,6 +106,13 @@ public class DataImpl implements Data
 		return null;
 	}
 	
+	/**
+	 * Vertausch die Matrixfelder [a1][a2] mit dem Feld [b1][b2]
+	 * @param a1
+	 * @param a2
+	 * @param b1
+	 * @param b2
+	 */
 	private void swap(int a1, int a2, int b1, int b2)
 	{
 		int c;
@@ -111,6 +121,10 @@ public class DataImpl implements Data
 		_matrix[b1][b2] = c;
 	}
 	
+	/**
+	 * Liefert die Position des leeren Feldes.
+	 * @return
+	 */
 	private int[] get16Position()
 	{
 		return getPos(16);

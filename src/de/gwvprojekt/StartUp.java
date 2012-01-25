@@ -2,7 +2,7 @@ package de.gwvprojekt;
 
 import de.gwvprojekt.algorithm.DataImpl;
 import de.gwvprojekt.ui.Data;
-import de.gwvprojekt.ui.GameUI;
+import de.gwvprojekt.ui.GameWerkzeug;
 
 public class StartUp
 {
@@ -10,10 +10,11 @@ public class StartUp
 	/**
 	 * @param args
 	 */
+	@SuppressWarnings("unused")
 	public static void main(String[] args)
 	{
 		Data data = new DataImpl();
-		GameUI _ui = new GameUI(data);
+		GameWerkzeug _game = new GameWerkzeug(data);
 	}
 
 }
