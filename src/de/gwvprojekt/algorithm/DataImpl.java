@@ -80,6 +80,29 @@ public class DataImpl implements Data
 
 	}
 	
+	public int getValue(int row, int column) {
+		return _matrix[row][column];
+	}
+
+	public int[] getPos(int value)
+	{
+		int[] result = new int[2];
+		
+		for(int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				if(_matrix[i][j] == value)
+				{
+					result[0] = i;
+					result[1] = j;
+					return result;
+				}
+			}
+		}
+		return null;
+	}
+	
 	private void swap(int a1, int a2, int b1, int b2)
 	{
 		int c;
@@ -90,22 +113,6 @@ public class DataImpl implements Data
 	
 	private int[] get16Position()
 	{
-		int[] result = new int[2];
-		
-		for(int i = 0; i < 4; i++)
-		{
-			for (int j = 0; j < 4; j++)
-			{
-				if(_matrix[i][j] == 16)
-				{
-					result[0] = i;
-					result[1] = j;
-					return result;
-				}
-			}
-		}
-		//System.out.println("NOES!");
-		return null;
+		return getPos(16);
 	}
-
 }

@@ -22,7 +22,7 @@ public class AStar implements Algorithm{
 	}
 	
 	public void move(int direction){
-		if(direction == State.inverseDirection(goalNode.getDirection()))
+		if(direction == AStar.inverseDirection(goalNode.getDirection()))
 			goalNode = goalNode.getPredecessor();
 		else
 			goalNode = getGoalNode(goalNode.getState().move(direction));
@@ -32,7 +32,7 @@ public class AStar implements Algorithm{
 		if(goalNode == null)
 			return 0;
 		else
-			return State.inverseDirection(goalNode.getDirection());
+			return AStar.inverseDirection(goalNode.getDirection());
 	}
 	
 	public State getState(){
@@ -67,5 +67,12 @@ public class AStar implements Algorithm{
 		}
 		
 		return null;
+	}
+
+	public static int inverseDirection(int direction){
+		if(direction > 0 && direction < 5)
+			return 5 - direction;
+		else
+			return 0;
 	}
 }
