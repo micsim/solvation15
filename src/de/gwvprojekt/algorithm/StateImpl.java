@@ -180,6 +180,24 @@ public class StateImpl implements State, Cloneable{
 		}
 	}
 	
+	public int getNumberOfMisplacedTiles(){
+		int number = 0;
+		int a = 1;
+		
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				if(_matrix[i][j] != a){
+					number++;
+				}
+				a++;
+			}
+		}
+		
+		return number;
+	}
+	
 	
 	/**
 	 * Vertausch die Matrixfelder [a1][a2] mit dem Feld [b1][b2]

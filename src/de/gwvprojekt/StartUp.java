@@ -1,10 +1,6 @@
 package de.gwvprojekt;
 
-import de.gwvprojekt.algorithm.AStar;
-import de.gwvprojekt.algorithm.Algorithm;
-import de.gwvprojekt.algorithm.HeuristicImpl;
-import de.gwvprojekt.algorithm.State;
-import de.gwvprojekt.algorithm.StateImpl;
+import de.gwvprojekt.algorithm.*;
 import de.gwvprojekt.ui.GameWerkzeug;
 
 public class StartUp
@@ -19,7 +15,7 @@ public class StartUp
 		State data = new StateImpl();
 		data.randomizeData();
 		
-		Algorithm alg = new AStar(new HeuristicImpl());
+		Algorithm alg = new AStar(new HeuristicCountImpl());
 		
 		GameWerkzeug _game = new GameWerkzeug(data, alg);
 	}

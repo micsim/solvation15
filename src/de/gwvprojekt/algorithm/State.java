@@ -39,4 +39,6 @@ public interface State
 	public void initializeData();
 	
 	public State goalState();
+	
+	public int getNumberOfMisplacedTiles();
 }
