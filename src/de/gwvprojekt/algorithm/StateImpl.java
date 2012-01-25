@@ -8,15 +8,19 @@ public class StateImpl extends DataImpl implements State{
 		switch(direction){
 		case 1:
 			tile_pos[0]--;
+			break;
 		case 2:
 			tile_pos[1]--;
+			break;
 		case 3:
 			tile_pos[1]++;
+			break;
 		case 4:
 			tile_pos[0]++;
+			break;
 		}
 		
-		State state = (State) clone();
+		State state = (State) this.clone();
 		state.move(tile_pos[0], tile_pos[1]);
 		
 		return state;

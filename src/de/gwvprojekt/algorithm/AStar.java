@@ -75,4 +75,28 @@ public class AStar implements Algorithm{
 		else
 			return 0;
 	}
+
+	@Override
+	public String getHintString() {
+		String text;
+		
+		switch(getHintDirection()){
+		case 1:
+			text = "Up";
+			break;
+		case 2:
+			text = "Left";
+			break;
+		case 3:
+			text = "Right";
+			break;
+		case 4:
+			text = "Down";
+			break;
+			default:
+				text = "";
+		}
+		
+		return text;
+	}
 }

@@ -1,7 +1,10 @@
 package de.gwvprojekt;
 
-import de.gwvprojekt.algorithm.DataImpl;
-import de.gwvprojekt.ui.Data;
+import de.gwvprojekt.algorithm.AStar;
+import de.gwvprojekt.algorithm.Algorithm;
+import de.gwvprojekt.algorithm.HeuristicImpl;
+import de.gwvprojekt.algorithm.State;
+import de.gwvprojekt.algorithm.StateImpl;
 import de.gwvprojekt.ui.GameWerkzeug;
 
 public class StartUp
@@ -13,8 +16,12 @@ public class StartUp
 	@SuppressWarnings("unused")
 	public static void main(String[] args)
 	{
-		Data data = new DataImpl();
-		GameWerkzeug _game = new GameWerkzeug(data);
+		State data = new StateImpl();
+		data.randomizeData();
+		
+		Algorithm alg = new AStar(new StateImpl(), new HeuristicImpl());
+		
+		GameWerkzeug _game = new GameWerkzeug(data, alg);
 	}
 
 }

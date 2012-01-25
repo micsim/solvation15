@@ -4,7 +4,7 @@ import java.util.Random;
 
 import de.gwvprojekt.ui.Data;
 
-public class DataImpl implements Data
+public class DataImpl implements Data, Cloneable
 {
 	// Felder
 	private int[][] _matrix;
@@ -54,7 +54,6 @@ public class DataImpl implements Data
 	@Override
 	public void initializeData()
 	{
-		_random.setSeed(System.nanoTime());
 		int a = 1;
 		
 		for (int i = 0; i < 4; i++)
@@ -66,7 +65,11 @@ public class DataImpl implements Data
 				a++;
 			}
 		}
-		
+	}
+	
+	public void randomizeData(){
+		_random.setSeed(System.nanoTime());
+
 		int swapnumber = 50; 
 		for (int i = 0; i < swapnumber; i++)
 		{
@@ -80,7 +83,6 @@ public class DataImpl implements Data
 			
 			swap(a1,a2,b1,b2);
 		}
-
 	}
 	
 	public int getValue(int row, int column) {

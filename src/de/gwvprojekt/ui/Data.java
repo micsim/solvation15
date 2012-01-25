@@ -3,6 +3,8 @@ package de.gwvprojekt.ui;
 
 public interface Data
 {
+	public void randomizeData();
+	
 	/**
 	 * Liefert den String eines Matrixfeldes an der Stelle row, column
 	 * 
