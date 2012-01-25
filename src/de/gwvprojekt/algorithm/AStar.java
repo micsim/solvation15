@@ -4,55 +4,12 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.PriorityQueue;
 
-public class AStar implements Algorithm{
-	private Heuristic heuristic;
-	private Node  	  goalNode;
-	int[]             directions;
-	
-	public AStar(Heuristic h){
-		heuristic = h;
+public class AStar extends AbstractAlgorithm{
+	public AStar(Heuristic h) {
+		super(h);
 	}
-	
-	public boolean findPath(State startState) throws CloneNotSupportedException{
-		goalNode = getGoalNode(startState);
-		calculateDirections();
-		
-		return goalNode != null;
-	}
-	
-	public void move(int direction) throws CloneNotSupportedException{
-		if(direction == directions[0])
-			goalNode = goalNode.getPredecessor();
-		else
-			goalNode = getGoalNode(goalNode.getState().move(direction));
-	}
-	
-	public void calculateDirections(){
-		int length = 0;
-		Node current = goalNode;
-		
-		while(current != null){
-			length++;
-			current = current.getPredecessor();
-		}
-		
-		if(length > 0)
-			length--;
-		
-		directions = new int[length];
-		current = goalNode;
-		
-		for(int i=1;i<=length;i++){
-			directions[length - i] = current.getDirection();
-			current = current.getPredecessor();
-		}
-	}
-	
-	public State getState(){
-		return goalNode.getState();
-	}
-	
-	private Node getGoalNode(State start) throws CloneNotSupportedException{
+
+	protected Node getGoalNode(State start) throws CloneNotSupportedException{
 		State goal = start.goalState();
 		
 		PriorityQueue<Node> frontier = new PriorityQueue<Node>();
@@ -82,50 +39,5 @@ public class AStar implements Algorithm{
 		}
 		
 		return null;
-	}
-
-	@Override
-	public String getHintString(){
-		if(directions.length == 0)
-			return "";
-		else
-			return directionText(directions[0]);
-	}
-
-	@Override
-	public String getSolveString() {		
-		if(directions.length == 0)
-			return "";
-		else{
-			String text = directionText(directions[0]);
-			for(int i=1;i<directions.length;i++){
-				text += ", " + directionText(directions[i]);
-			}
-			
-			return text;
-		}
-	}
-	
-	private static String directionText(int direction){
-		String text;
-		
-		switch(direction){
-		case 1:
-			text = "Up";
-			break;
-		case 2:
-			text = "Left";
-			break;
-		case 3:
-			text = "Right";
-			break;
-		case 4:
-			text = "Down";
-			break;
-			default:
-				text = "";
-		}
-		
-		return text;
 	}
 }
