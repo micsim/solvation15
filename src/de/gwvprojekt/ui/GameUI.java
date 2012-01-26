@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.GridLayout;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -24,8 +25,10 @@ public class GameUI
 	private JButton _initializeButton;
 	private JButton _hintButton;
 	private JButton _solveButton;
+	private JButton _restartButton;
 	private JLabel _hintBar;
 	private JLabel _hintBar2;
+	private JComboBox _drop;
 	
 	// Data + Algorithm
 	private State _data;
@@ -35,6 +38,7 @@ public class GameUI
 	private final String HINT = "Hint";
 	private final String INIT = "Initialize";
 	private final String SOLVE = "Solve";
+	private final String RESTART = "Restart";
 	
 	/**
 	 * Konstruktor der Klasse GameUI
@@ -47,6 +51,8 @@ public class GameUI
 		_squares = new JButton[16];
 		
 		_mainframe = new JFrame();
+		_mainframe.setSize(500, 500);
+		_mainframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		_submainframe = new JPanel();
 		_matrixframe = new JPanel();
 		_buttonframe = new JPanel();
@@ -54,8 +60,12 @@ public class GameUI
 		_initializeButton = new JButton(INIT);
 		_hintButton = new JButton(HINT);
 		_solveButton = new JButton(SOLVE);
+		_restartButton = new JButton(RESTART);
 		_hintBar = new JLabel("(>'-')>");
 		_hintBar2 = new JLabel("Dieser Text ist (noch) keine Hilfe! <('-'<)");
+		_drop = new JComboBox();
+		_drop.addItem("A*");
+		_drop.addItem("limited A*");
 		
 		for (int i = 0; i < 16; i++)
 		{
@@ -65,7 +75,7 @@ public class GameUI
 		_mainframe.setLayout(new BorderLayout());
 		_submainframe.setLayout(new BorderLayout());
 		_matrixframe.setLayout(new GridLayout(4,4));
-		_buttonframe.setLayout(new GridLayout(3,1));
+		_buttonframe.setLayout(new GridLayout(5,1));
 		_southernTextframe.setLayout(new GridLayout(2,1));
 		
 		_mainframe.add(_submainframe, BorderLayout.CENTER);
@@ -81,9 +91,11 @@ public class GameUI
 			_matrixframe.add(_squares[i]);
 		}
 		
+		_buttonframe.add(_restartButton);
 		_buttonframe.add(_initializeButton);
 		_buttonframe.add(_hintButton);
 		_buttonframe.add(_solveButton);
+		_buttonframe.add(_drop);
 		
 		updateUI(true);
 		_mainframe.pack();
@@ -183,5 +195,23 @@ public class GameUI
 	public JButton getSolveButton()
 	{
 		return _solveButton;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public JButton getRestartButton()
+	{
+		return _restartButton;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public JComboBox getDropMenue()
+	{
+		return _drop;
 	}
 }
