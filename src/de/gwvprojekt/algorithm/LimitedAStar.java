@@ -19,15 +19,17 @@ public class LimitedAStar extends AbstractAlgorithm{
 		PriorityQueue<Node> reverseFrontier = new PriorityQueue<Node>(MAX_FRONTIER_SIZE,
 				                                                      new NodeReverseComparator());
 		
-		Node newNode = new NodeImpl(heuristic.calculateFor(start), start, null, (byte) 0);
+		Node newNode = new NodeImpl(0, heuristic.calculateFor(start), start, null, (byte) 0);
 		frontier.add(newNode);
 		reverseFrontier.add(newNode);
 		
 		Collection<State> closed = new HashSet<State>();
 		
-		int currentPathCost = 0;
+		int d = 0;
 		
-		while(!frontier.isEmpty()){			
+		while(!frontier.isEmpty()){
+			d++;
+			
 			Node current = frontier.poll();
 //			System.out.println(current.getEstimatedCost());
 //			System.out.println(reverseFrontier.peek().getEstimatedCost());
@@ -42,15 +44,16 @@ public class LimitedAStar extends AbstractAlgorithm{
 //			System.out.println(current.getEstimatedCost());
 			closed.add(current.getState());
 			
-			if(current.getState().equals(goal) || (depth > 0 && currentPathCost >= depth)){
+			if(current.getState().equals(goal) || (depth > 0 && d >= depth)){
 				return current;
 			}
 			
-			currentPathCost++;
+			int currentPathCost = current.getCostTo();
 			for(byte direction : current.getState().getPossibleDirections()){
 				State neighbor = current.getState().move(direction);
 				if(!closed.contains(neighbor)){
-					newNode = new NodeImpl(currentPathCost + heuristic.calculateFor(neighbor),
+					newNode = new NodeImpl(currentPathCost,
+							               currentPathCost + heuristic.calculateFor(neighbor),
 			     			  			   neighbor,
 			     			  			   current,
 			     			  			   direction);

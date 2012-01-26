@@ -13,24 +13,26 @@ public class AStar extends AbstractAlgorithm{
 		State goal = start.goalState();
 		
 		PriorityQueue<Node> frontier = new PriorityQueue<Node>();
-		frontier.add(new NodeImpl(heuristic.calculateFor(start), start, null, (byte) 0));
+		frontier.add(new NodeImpl(0, heuristic.calculateFor(start), start, null, (byte) 0));
 		
 		Collection<State> closed = new HashSet<State>();
 		
-		int currentPathCost = 0;
-		
+		int d = 0;
 		while(!frontier.isEmpty()){
+			d++;
+			
 			Node current = frontier.poll();
 			closed.add(current.getState());
-			if(current.getState().equals(goal) || (depth > 0 && currentPathCost >= depth)){
+			if(current.getState().equals(goal) || (depth > 0 && d >= depth)){
 				return current;
 			}
 			
-			currentPathCost++;
+			int currentPathCost = current.getCostTo() + 1;
 			for(byte direction : current.getState().getPossibleDirections()){
 				State neighbor = current.getState().move(direction);
 				if(!closed.contains(neighbor)){
-					frontier.add(new NodeImpl(currentPathCost + heuristic.calculateFor(neighbor),
+					frontier.add(new NodeImpl(currentPathCost,
+											  currentPathCost + heuristic.calculateFor(neighbor),
 							     			  neighbor,
 							     			  current,
 							     			  direction));

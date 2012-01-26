@@ -1,13 +1,15 @@
 package de.gwvprojekt.algorithm;
 
 public class NodeImpl implements Node {
-	int estimatedCost;
+	int estimatedTotalCost;
+	int costToHere;
 	State state;
 	Node predecessor;
 	byte moveDirection;
 	
-	public NodeImpl(int ec, State s, Node p, byte direction){
-		estimatedCost = ec;
+	public NodeImpl(int costTo, int ec, State s, Node p, byte direction){
+		costToHere = costTo;
+		estimatedTotalCost = ec;
 		state = s;
 		predecessor = p;
 		moveDirection = direction;
@@ -17,17 +19,21 @@ public class NodeImpl implements Node {
 		if(o == null)
 			throw new NullPointerException();
 
-		int oec = o.getEstimatedCost();
-		if(estimatedCost < oec)
+		int oec = o.getEstimatedTotalCost();
+		if(estimatedTotalCost < oec)
 			return -1;
-		else if(estimatedCost > oec)
+		else if(estimatedTotalCost > oec)
 			return 1;
 		else
 			return 0;
 	}
 
-	public int getEstimatedCost() {
-		return estimatedCost;
+	public int getEstimatedTotalCost() {
+		return estimatedTotalCost;
+	}
+	
+	public int getCostTo() {
+		return costToHere;
 	}
 
 	public State getState() {

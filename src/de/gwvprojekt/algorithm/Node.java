@@ -16,7 +16,9 @@ public interface Node extends Comparable<Node>{
 	 * 
 	 * @return int
 	 */
-	public int   getEstimatedCost();
+	public int   getEstimatedTotalCost();
+	
+	public int   getCostTo();
 	
 	/**
 	 * Node from wich the search discovered this one.
