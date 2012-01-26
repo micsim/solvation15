@@ -2,8 +2,8 @@ package de.gwvprojekt.algorithm;
 
 public abstract class AbstractAlgorithm implements Algorithm {
 	protected Heuristic heuristic;
-	private Node  	  goalNode;
-	int[]             directions;
+	private Node  	    goalNode;
+	byte[]              directions;
 	
 	protected abstract Node getGoalNode(State start) throws CloneNotSupportedException;
 	
@@ -18,7 +18,7 @@ public abstract class AbstractAlgorithm implements Algorithm {
 		return goalNode != null;
 	}
 	
-	public void move(int direction) throws CloneNotSupportedException{
+	public void move(byte direction) throws CloneNotSupportedException{
 		if(direction == directions[0])
 			goalNode = goalNode.getPredecessor();
 		else
@@ -37,7 +37,7 @@ public abstract class AbstractAlgorithm implements Algorithm {
 		if(length > 0)
 			length--;
 		
-		directions = new int[length];
+		directions = new byte[length];
 		current = goalNode;
 		
 		for(int i=1;i<=length;i++){
@@ -72,7 +72,7 @@ public abstract class AbstractAlgorithm implements Algorithm {
 		}
 	}
 	
-	private static String directionText(int direction){
+	private static String directionText(byte direction){
 		String text;
 		
 		switch(direction){

@@ -5,5 +5,5 @@ public interface Algorithm {
 	public State   getState();
 	public String  getHintString();
 	public String  getSolveString();
-	public void    move(int direction) throws CloneNotSupportedException;
+	public void    move(byte direction) throws CloneNotSupportedException;
 }

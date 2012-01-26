@@ -4,40 +4,40 @@ import java.util.Random;
 
 public class StateImpl implements State, Cloneable{
 	// Felder
-	private int[][] _matrix;
+	private byte[][] _matrix;
 	
 	/**
-	 * Konstruktor der Klasse DataImpl, die das Interface Data implementiert
+	 * Konstruktor der Klasse DataImpl, die das byteerface Data implementiert
 	 */
 	public StateImpl()
 	{
-		_matrix = new int[4][4];
+		_matrix = new byte[4][4];
 		initializeData();
 	}
 	
-	public StateImpl(int[][] matrix){
+	public StateImpl(byte[][] matrix){
 		_matrix = matrix;
 	}
 	
 	@Override
-	public String getStringValue(int row, int column)
+	public String getStringValue(byte row, byte column)
 	{
 		return ""+_matrix[row][column];
 	}
 
 	@Override
-	public void move(int row, int column)
+	public void move(byte row, byte column)
 	{
 		if(isMovable(row, column))
 		{
 
-			int[] pos16 = get16Position();
+			byte[] pos16 = get16Position();
 			swap(row, column, pos16[0], pos16[1]);
 		}
 	}
 
 	@Override
-	public boolean isMovable(int row, int column)
+	public boolean isMovable(byte row, byte column)
 	{
 		boolean isOutOfBounds = !(row >= 0 && row <= 3 && column >= 0 && column <= 3);
 		assert !isOutOfBounds : "Out of bounds!";
@@ -46,7 +46,7 @@ public class StateImpl implements State, Cloneable{
 			return false;
 		
 		boolean result = false;
-		int[] pos16 = get16Position();		
+		byte[] pos16 = get16Position();		
 		if((pos16[0]-1 == row && pos16[1] == column)
 				||(pos16[0]+1 == row && pos16[1] == column)
 				||(pos16[0] == row && pos16[1]-1 == column)
@@ -60,13 +60,13 @@ public class StateImpl implements State, Cloneable{
 	@Override
 	public void initializeData()
 	{
-		int a = 1;
+		byte a = 1;
 		
-		for (int i = 0; i < 4; i++)
+		for (byte i = 0; i < 4; i++)
 		{
-			for (int j = 0; j < 4; j++)
+			for (byte j = 0; j < 4; j++)
 			{
-				//System.out.println(a);
+				//System.out.prbyteln(a);
 				_matrix[i][j] = a;
 				a++;
 			}
@@ -76,32 +76,32 @@ public class StateImpl implements State, Cloneable{
 	public void randomizeData(Random random){
 		random.setSeed(System.nanoTime());
 
-		int swapnumber = 50; 
-		for (int i = 0; i < swapnumber; i++)
+		byte swapnumber = 50; 
+		for (byte i = 0; i < swapnumber; i++)
 		{
-			int a1, a2, b1, b2;
+			byte a1, a2, b1, b2;
 			do{
-				a1 = random.nextInt(4);
-				a2 = random.nextInt(4);
-				b1 = random.nextInt(4);
-				b2 = random.nextInt(4);
+				a1 = (byte) random.nextInt(4);
+				a2 = (byte) random.nextInt(4);
+				b1 = (byte) random.nextInt(4);
+				b2 = (byte) random.nextInt(4);
 			}while((a1==b1)&&(a2==b2));
 			
 			swap(a1,a2,b1,b2);
 		}
 	}
 	
-	public int getValue(int row, int column) {
+	public byte getValue(byte row, byte column) {
 		return _matrix[row][column];
 	}
 
-	public int[] getPos(int value)
+	public byte[] getPos(byte value)
 	{
-		int[] result = new int[2];
+		byte[] result = new byte[2];
 		
-		for(int i = 0; i < 4; i++)
+		for(byte i = 0; i < 4; i++)
 		{
-			for (int j = 0; j < 4; j++)
+			for (byte j = 0; j < 4; j++)
 			{
 				if(_matrix[i][j] == value)
 				{
@@ -115,8 +115,8 @@ public class StateImpl implements State, Cloneable{
 	}
 
 	@Override
-	public State move(int direction) throws CloneNotSupportedException {
-		int[] tile_pos = getPos(16);
+	public State move(byte direction) throws CloneNotSupportedException {
+		byte[] tile_pos = getPos((byte) 16);
 		
 		switch(direction){
 		case 1:
@@ -146,11 +146,11 @@ public class StateImpl implements State, Cloneable{
 	@Override
 	public boolean equals(Object o){
 		if(o instanceof StateImpl){
-			int[][] otherMatrix = ((StateImpl) o)._matrix;
+			byte[][] otherMatrix = ((StateImpl) o)._matrix;
 			
-			for (int i = 0; i < 4; i++)
+			for (byte i = 0; i < 4; i++)
 			{
-				for (int j = 0; j < 4; j++)
+				for (byte j = 0; j < 4; j++)
 				{
 					if(_matrix[i][j] != otherMatrix[i][j]){
 						return false;
@@ -165,8 +165,8 @@ public class StateImpl implements State, Cloneable{
 	
 	@Override
 	public Object clone() throws CloneNotSupportedException{
-		int[][] newMatrix = new int[4][];
-		for(int i=0;i<4;i++){
+		byte[][] newMatrix = new byte[4][];
+		for(byte i=0;i<4;i++){
 			newMatrix[i] = _matrix[i].clone();
 		}
 		
@@ -174,58 +174,58 @@ public class StateImpl implements State, Cloneable{
 	}
 
 	@Override
-	public int[] getPossibleDirections() {
-		int[] pos = getPos(16);
+	public byte[] getPossibleDirections() {
+		byte[] pos = getPos((byte) 16);
 
 		if(pos[0] > 0 && pos[0] < 3 && pos[1] > 0 && pos[1] < 3){
-			int[] arr = {1,2,3,4}; // All directions.
+			byte[] arr = {1,2,3,4}; // All directions.
 			return arr;
 		}else if(pos[0] == 0){
 			// In the first row.
 			if(pos[1] > 0 && pos[1] < 3){
-				int[] arr = {2, 3, 4}; // Not up.
+				byte[] arr = {2, 3, 4}; // Not up.
 				return arr;
 			}else if(pos[1] == 0){
 				// Upper left corner.
-				int[] arr = {3, 4}; // Right or down.
+				byte[] arr = {3, 4}; // Right or down.
 				return arr;
 			}else{
 				// Upper right corner.
-				int[] arr = {3, 4}; // Left or down.
+				byte[] arr = {3, 4}; // Left or down.
 				return arr;
 			}
 		}else if(pos[0] == 3){
 			// In the last row.
 			if(pos[1] > 0 && pos[1] < 3){
-				int[] arr = {1, 2, 3}; // Not down.
+				byte[] arr = {1, 2, 3}; // Not down.
 				return arr;
 			}else if(pos[1] == 0){
 				// Lower left corner.
-				int[] arr = {1, 3}; // Right or up.
+				byte[] arr = {1, 3}; // Right or up.
 				return arr;
 			}else{
 				// Lower right corner.
-				int[] arr = {1, 2}; // Left or up.
+				byte[] arr = {1, 2}; // Left or up.
 				return arr;
 			}
 		}else if(pos[1] == 0){
 			// In the first column. (Not at the edges.)
-			int[] arr = {1, 3, 4}; // Up, down or right.
+			byte[] arr = {1, 3, 4}; // Up, down or right.
 			return arr;
 		}else{
 			// In the last column. (Not at the edges.)
-			int[] arr = {1, 2, 4}; // Up, down or left.
+			byte[] arr = {1, 2, 4}; // Up, down or left.
 			return arr;
 		}
 	}
 	
-	public int getNumberOfMisplacedTiles(){
-		int number = 0;
-		int a = 1;
+	public byte getNumberOfMisplacedTiles(){
+		byte number = 0;
+		byte a = 1;
 		
-		for (int i = 0; i < 4; i++)
+		for (byte i = 0; i < 4; i++)
 		{
-			for (int j = 0; j < 4; j++)
+			for (byte j = 0; j < 4; j++)
 			{
 				if(_matrix[i][j] != a){
 					number++;
@@ -245,9 +245,9 @@ public class StateImpl implements State, Cloneable{
 	 * @param b1
 	 * @param b2
 	 */
-	private void swap(int a1, int a2, int b1, int b2)
+	private void swap(byte a1, byte a2, byte b1, byte b2)
 	{
-		int c;
+		byte c;
 		c = _matrix[a1][a2];
 		_matrix[a1][a2] = _matrix[b1][b2];
 		_matrix[b1][b2] = c;
@@ -257,8 +257,8 @@ public class StateImpl implements State, Cloneable{
 	 * Liefert die Position des leeren Feldes.
 	 * @return
 	 */
-	private int[] get16Position()
+	private byte[] get16Position()
 	{
-		return getPos(16);
+		return getPos((byte) 16);
 	}
 }

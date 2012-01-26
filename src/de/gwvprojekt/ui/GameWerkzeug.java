@@ -91,17 +91,17 @@ public class GameWerkzeug
 				});
 		
 		// Spielfelder
-		for (int i = 0; i < 16; i++)
+		for (byte i = 0; i < 16; i++)
 		{
-			final int a = i;
+			final byte a = i;
 			_ui.getMatrixButtons(i).addActionListener(
 					new ActionListener()
 					{
 						@Override
 						public void actionPerformed(ActionEvent e)
 						{
-							int column = a%4;
-							int row = (a-column)/4;
+							byte column = (byte) (a%4);
+							byte row = (byte) (a/4);
 							
 							_data.move(row, column);
 							_ui.updateUI();

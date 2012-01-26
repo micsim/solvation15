@@ -4,9 +4,9 @@ public class NodeImpl implements Node {
 	int estimatedCost;
 	State state;
 	Node predecessor;
-	int moveDirection;
+	byte moveDirection;
 	
-	public NodeImpl(int ec, State s, Node p, int direction){
+	public NodeImpl(int ec, State s, Node p, byte direction){
 		estimatedCost = ec;
 		state = s;
 		predecessor = p;
@@ -38,7 +38,7 @@ public class NodeImpl implements Node {
 		return predecessor;
 	}
 
-	public int getDirection() {
+	public byte getDirection() {
 		return moveDirection;
 	}
 }
