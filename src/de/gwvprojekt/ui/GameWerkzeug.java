@@ -11,17 +11,19 @@ public class GameWerkzeug
 	//Felder
 	private GameUI _ui;
 	private State _data;
-	private Algorithm _alg;
+	private Algorithm _alg1;
+	private Algorithm _alg2;
 	private Random _random;
 	
 	/**
 	 * Konstruktor der Klasse Gamewerkzeug
 	 * @param data
 	 */
-	public GameWerkzeug(State data, Algorithm alg)
+	public GameWerkzeug(State data, Algorithm alg1, Algorithm alg2)
 	{
 		_data = data;
-		_alg = alg;
+		_alg1 = alg1;
+		_alg2 = alg2;
 		_random = new Random();
 		_ui = new GameUI(_data);
 		addActions();
@@ -59,10 +61,20 @@ public class GameWerkzeug
 						
 						_ui.updateUI(false);
 						try {
-							if(_alg.findPath(_data, 10))
-								text = _alg.getSolveString();
+							if(_ui.getDropMenue().getSelectedIndex()==0)
+							{
+								if(_alg1.findPath(_data, 10)) // A*
+									text = _alg1.getSolveString();
+								else
+									text = "Insolvable!";
+							}
 							else
-								text = "Insolvable!";
+							{
+								if(_alg2.findPath(_data, 10)) // limited A*
+									text = _alg2.getSolveString();
+								else
+									text = "Insolvable!";
+							}
 						} catch (CloneNotSupportedException ex) {
 							// TODO Auto-generated catch block
 							ex.printStackTrace();
@@ -87,10 +99,20 @@ public class GameWerkzeug
 						String text = "";
 						_ui.updateUI(false);
 						try {
-							if(_alg.findPath(_data))
-								text = _alg.getSolveString();
+							if(_ui.getDropMenue().getSelectedIndex()==0)
+							{
+								if(_alg1.findPath(_data)) // A*
+									text = _alg1.getSolveString();
+								else
+									text = "Insolvable!";
+							}
 							else
-								text = "Insolvable!";
+							{
+								if(_alg2.findPath(_data)) // limited A*
+									text = _alg2.getSolveString();
+								else
+									text = "Insolvable!";
+							}
 						} catch (CloneNotSupportedException ex) {
 							// TODO Auto-generated catch block
 							ex.printStackTrace();
@@ -123,5 +145,16 @@ public class GameWerkzeug
 						}
 					});
 		}
+		
+		_ui.getRestartButton().addActionListener(
+				new ActionListener()
+				{
+					@Override
+					public void actionPerformed(ActionEvent e)
+					{
+						_data.initializeData();
+						_ui.updateUI(true);
+					}
+				});
 	}
 }

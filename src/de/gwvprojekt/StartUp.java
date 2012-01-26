@@ -14,9 +14,10 @@ public class StartUp
 	{
 		State data = new StateImpl();
 		
-		Algorithm alg = new LimitedAStar(new HeuristicManhattanImpl());
+		Algorithm alg1 = new AStar(new HeuristicManhattanImpl());
+		Algorithm alg2 = new LimitedAStar(new HeuristicManhattanImpl());
 		
-		GameWerkzeug _game = new GameWerkzeug(data, alg);
+		GameWerkzeug _game = new GameWerkzeug(data, alg1, alg2);
 	}
 
 }
