@@ -7,7 +7,7 @@ public class StateImpl implements State, Cloneable{
 	private byte[][] _matrix;
 	
 	/**
-	 * Konstruktor der Klasse DataImpl, die das byteerface Data implementiert
+	 * Konstruktor der Klasse DataImpl, die das interface Data implementiert
 	 */
 	public StateImpl()
 	{
@@ -39,13 +39,8 @@ public class StateImpl implements State, Cloneable{
 	@Override
 	public boolean isMovable(byte row, byte column)
 	{
-		boolean isOutOfBounds = !(row >= 0 && row <= 3 && column >= 0 && column <= 3);
-		assert !isOutOfBounds : "Out of bounds!";
-		// TODO Why does the above assert not work? asserts müssen ganz am anfang
-		// stehen!
-		if(isOutOfBounds)
-			return false;
-		
+		assert (row >= 0 && row <= 3 && column >= 0 && column <= 3) : "Out of bounds!";
+
 		boolean result = false;
 		byte[] pos16 = get16Position();		
 		if((pos16[0]-1 == row && pos16[1] == column)
