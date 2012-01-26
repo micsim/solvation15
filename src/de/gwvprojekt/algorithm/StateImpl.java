@@ -40,6 +40,9 @@ public class StateImpl implements State, Cloneable{
 	public boolean isMovable(byte row, byte column)
 	{
 		assert (row >= 0 && row <= 3 && column >= 0 && column <= 3) : "Out of bounds!";
+		if(!(row >= 0 && row <= 3 && column >= 0 && column <= 3))
+			return false;
+		// Should have been covered by the assert but somehow is not.
 
 		boolean result = false;
 		byte[] pos16 = get16Position();		
@@ -223,7 +226,7 @@ public class StateImpl implements State, Cloneable{
 				return arr;
 			}else{
 				// Upper right corner.
-				byte[] arr = {3, 4}; // Left or down.
+				byte[] arr = {2, 4}; // Left or down.
 				return arr;
 			}
 		}else if(pos[0] == 3){
