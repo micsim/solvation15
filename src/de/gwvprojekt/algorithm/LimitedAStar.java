@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.PriorityQueue;
 
 public class LimitedAStar extends AbstractAlgorithm{
-	final static int MAX_FRONTIER_SIZE = 1024;
+	final static int MAX_FRONTIER_SIZE = 1024*1024*8;
 	
 	public LimitedAStar(Heuristic h) {
 		super(h);
