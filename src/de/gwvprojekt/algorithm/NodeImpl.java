@@ -41,4 +41,9 @@ public class NodeImpl implements Node {
 	public byte getDirection() {
 		return moveDirection;
 	}
+
+	@Override
+	public void emptyState() {
+		state = null;
+	}
 }

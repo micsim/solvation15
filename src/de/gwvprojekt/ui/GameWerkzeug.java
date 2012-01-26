@@ -61,6 +61,9 @@ public class GameWerkzeug
 
 						String text = _alg.getHintString();
 						
+						System.out.println("Hint:");
+						System.out.println(text);
+						
 						_ui.getHintLabel().setText("Hint:");
 						_ui.getHintLabel2().setText(text);
 						_ui.updateUI();
@@ -83,6 +86,9 @@ public class GameWerkzeug
 						}
 
 						String text = _alg.getSolveString();
+						
+						System.out.println("How to solve:");
+						System.out.println(text);
 						
 						_ui.getHintLabel().setText("How to solve:");
 						_ui.getHintLabel2().setText(text);

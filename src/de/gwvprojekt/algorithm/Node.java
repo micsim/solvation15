@@ -5,4 +5,5 @@ public interface Node extends Comparable<Node>{
 	public State getState();
 	public Node  getPredecessor();
 	public byte  getDirection();
+	public void  emptyState();
 }

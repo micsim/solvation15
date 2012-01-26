@@ -40,7 +40,7 @@ public class LimitedAStar extends AbstractAlgorithm{
 //			}
 //			System.out.print("Picked: ");
 //			System.out.println(current.getEstimatedCost());
-//			closed.add(current.getState());
+			closed.add(current.getState());
 			
 			if(current.getState().equals(goal)){
 				return current;
@@ -63,6 +63,8 @@ public class LimitedAStar extends AbstractAlgorithm{
 					}
 				}
 			}
+			
+			current.emptyState();
 		}
 		
 		return null;

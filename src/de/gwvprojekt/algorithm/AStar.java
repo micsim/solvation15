@@ -36,6 +36,8 @@ public class AStar extends AbstractAlgorithm{
 							     			  direction));
 				}
 			}
+			
+			current.emptyState();
 		}
 		
 		return null;

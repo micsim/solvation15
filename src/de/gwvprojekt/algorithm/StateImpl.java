@@ -237,6 +237,21 @@ public class StateImpl implements State, Cloneable{
 		return number;
 	}
 	
+	public int getManhattanSum(){
+		int sum = 0;
+		for(int i=0; i<4; i++){
+			for(int j=0; j<4; j++){
+				int value = _matrix[i][j] - 1;
+				int row = value/4;
+				int column = value - row*4;
+				
+				sum += Math.abs(row - i) + Math.abs(column - j);
+			}
+		}
+		
+		return sum;
+	}
+	
 	
 	/**
 	 * Vertausch die Matrixfelder [a1][a2] mit dem Feld [b1][b2]
