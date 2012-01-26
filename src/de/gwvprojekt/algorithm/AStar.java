@@ -9,7 +9,7 @@ public class AStar extends AbstractAlgorithm{
 		super(h);
 	}
 
-	protected Node getGoalNode(State start) throws CloneNotSupportedException{
+	protected Node getGoalNode(State start, int depth) throws CloneNotSupportedException{
 		State goal = start.goalState();
 		
 		PriorityQueue<Node> frontier = new PriorityQueue<Node>();
@@ -22,7 +22,7 @@ public class AStar extends AbstractAlgorithm{
 		while(!frontier.isEmpty()){
 			Node current = frontier.poll();
 			closed.add(current.getState());
-			if(current.getState().equals(goal)){
+			if(current.getState().equals(goal) || (depth > 0 && currentPathCost >= depth)){
 				return current;
 			}
 			

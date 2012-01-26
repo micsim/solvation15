@@ -15,6 +15,15 @@ public interface Algorithm {
 	public boolean findPath(State currentState) throws CloneNotSupportedException;
 	
 	/**
+	 * Only searches until depth is reached.
+	 * Treats best node of the frontier as the goal.
+	 * 
+	 * @param currentState
+	 * @return
+	 */
+	public boolean findPath(State currentState, int depth) throws CloneNotSupportedException;
+	
+	/**
 	 * Get the state maintained by the implementation to be able to research the optimal path
 	 * after a move when needed.
 	 * 

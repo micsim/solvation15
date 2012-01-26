@@ -12,7 +12,7 @@ public class LimitedAStar extends AbstractAlgorithm{
 		super(h);
 	}
 
-	protected Node getGoalNode(State start) throws CloneNotSupportedException{
+	protected Node getGoalNode(State start, int depth) throws CloneNotSupportedException{
 		State goal = start.goalState();
 		
 		PriorityQueue<Node> frontier = new PriorityQueue<Node>(MAX_FRONTIER_SIZE);
@@ -42,7 +42,7 @@ public class LimitedAStar extends AbstractAlgorithm{
 //			System.out.println(current.getEstimatedCost());
 			closed.add(current.getState());
 			
-			if(current.getState().equals(goal)){
+			if(current.getState().equals(goal) || (depth > 0 && currentPathCost >= depth)){
 				return current;
 			}
 			

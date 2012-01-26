@@ -59,8 +59,8 @@ public class GameWerkzeug
 						
 						_ui.updateUI(false);
 						try {
-							if(_alg.findPath(_data))
-								text = _alg.getHintString();
+							if(_alg.findPath(_data, 10))
+								text = _alg.getSolveString();
 							else
 								text = "Insolvable!";
 						} catch (CloneNotSupportedException ex) {

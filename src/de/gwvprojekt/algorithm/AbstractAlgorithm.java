@@ -5,17 +5,21 @@ public abstract class AbstractAlgorithm implements Algorithm {
 	private Node  	    goalNode;
 	byte[]              directions;
 	
-	protected abstract Node getGoalNode(State start) throws CloneNotSupportedException;
+	protected abstract Node getGoalNode(State start, int depth) throws CloneNotSupportedException;
 	
 	public AbstractAlgorithm(Heuristic h){
 		heuristic = h;
 	}
 	
-	public boolean findPath(State startState) throws CloneNotSupportedException{
+	public boolean findPath(State start) throws CloneNotSupportedException{
+		return findPath(start, 0);
+	}
+	
+	public boolean findPath(State startState, int depth) throws CloneNotSupportedException{
 		if(!startState.isSolvable())
 			return false;
 		
-		goalNode = getGoalNode(startState);
+		goalNode = getGoalNode(startState, depth);
 		calculateDirections();
 		
 		return goalNode != null;
@@ -25,7 +29,7 @@ public abstract class AbstractAlgorithm implements Algorithm {
 		if(direction == directions[0])
 			goalNode = goalNode.getPredecessor();
 		else
-			goalNode = getGoalNode(goalNode.getState().move(direction));
+			findPath(goalNode.getState().move(direction));
 	}
 	
 	public void calculateDirections(){
