@@ -1,5 +1,9 @@
 package de.gwvprojekt.algorithm;
 
+/**
+ * Minimal heuristic: Always give 0.
+ *
+ */
 public class HeuristicMinimalImpl implements Heuristic
 {
 	@Override
@@ -7,5 +11,4 @@ public class HeuristicMinimalImpl implements Heuristic
 	{
 		return 0;
 	}
-
 }

@@ -33,7 +33,7 @@ public abstract class AbstractAlgorithm implements Algorithm {
 			throw(e);
 		}
 		
-		return goalNode != null;
+		return goalNode != null; // Have we found a goal node?
 	}
 	
 	public void move(byte direction) throws CloneNotSupportedException{
@@ -51,16 +51,20 @@ public abstract class AbstractAlgorithm implements Algorithm {
 			length++;
 			current = current.getPredecessor();
 		}
+		// Get the number of nodes from the goal note to the starting node.
 		
 		if(length > 0)
 			length--;
 		
 		directions = new byte[length];
+		// Create the array containing the directions.
 		current = goalNode;
 		
 		for(int i=1;i<=length;i++){
 			directions[length - i] = current.getDirection();
+			// Fill the array from the back.
 			current = current.getPredecessor();
+			// Loop through the nodes from goal to start.
 		}
 	}
 	
@@ -90,6 +94,12 @@ public abstract class AbstractAlgorithm implements Algorithm {
 		}
 	}
 	
+	/**
+	 * Get the string representation of the direction.
+	 * 
+	 * @param direction
+	 * @return String
+	 */
 	private static String directionText(byte direction){
 		String text;
 		

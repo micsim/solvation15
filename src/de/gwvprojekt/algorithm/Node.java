@@ -18,6 +18,11 @@ public interface Node extends Comparable<Node>{
 	 */
 	public int   getEstimatedTotalCost();
 	
+	/**
+	 * The cost to this node. One unit represents one move.
+	 * 
+	 * @return int
+	 */
 	public int   getCostTo();
 	
 	/**

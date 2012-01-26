@@ -10,10 +10,9 @@ public interface Algorithm {
 	 * 
 	 * @param currentState
 	 * @return boolean
-	 * @throws OutOfMemoryError 
 	 * @throws CloneNotSupportedException
 	 */
-	public boolean findPath(State currentState) throws OutOfMemoryError, CloneNotSupportedException;
+	public boolean findPath(State currentState);
 	
 	/**
 	 * Only searches until depth is reached.

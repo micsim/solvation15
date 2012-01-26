@@ -4,9 +4,6 @@ import java.util.Comparator;
 
 /**
  * Gives the reverse of the natural order.
- * 
- * @author michael
- *
  */
 public class NodeReverseComparator implements Comparator<Node> {
 	@Override
