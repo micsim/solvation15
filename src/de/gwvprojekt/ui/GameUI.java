@@ -51,7 +51,7 @@ public class GameUI
 		_squares = new JButton[16];
 		
 		_mainframe = new JFrame();
-		_mainframe.setSize(500, 500);
+		//_mainframe.setSize(750, 400);
 		_mainframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		_submainframe = new JPanel();
 		_matrixframe = new JPanel();
