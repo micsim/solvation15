@@ -95,7 +95,7 @@ public interface State
 	 * @return byte
 	 */
 	public byte getNumberOfMisplacedTiles();
-	
+
 	/**
 	 * Gibt die Summe aller Manhattan-Distanzen zwischen der Position jedes Tiles
 	 * in dem aktuellen und dem glšsten Zustand.
@@ -103,4 +103,5 @@ public interface State
 	 * @return int
 	 */
 	public int getManhattanSum();
+	public boolean solveable();
 }

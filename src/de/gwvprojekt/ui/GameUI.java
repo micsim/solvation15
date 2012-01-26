@@ -40,7 +40,6 @@ public class GameUI
 	 * Konstruktor der Klasse GameUI
 	 * @param data
 	 */
-	@SuppressWarnings("deprecation")
 	public GameUI(State data)//, Algorithm alg)
 	{
 		_data = data;
@@ -86,15 +85,15 @@ public class GameUI
 		_buttonframe.add(_hintButton);
 		_buttonframe.add(_solveButton);
 		
-		updateUI();
+		updateUI(true);
 		_mainframe.pack();
-		_mainframe.show();
+		_mainframe.setVisible(true);
 	}
 	
 	/**
 	 * Funktion um die UI zu aktualisieren 
 	 */
-	public void updateUI()
+	public void updateUI(boolean enable)
 	{
 		int a = 0;
 		for (byte x = 0; x < 4; x++)
@@ -114,7 +113,7 @@ public class GameUI
 				if(_data.isMovable(x, y))
 				{
 					_squares[a].setBackground(Color.GREEN);
-					_squares[a].setEnabled(true);
+					_squares[a].setEnabled(enable);
 				}
 				else
 				{
@@ -124,6 +123,10 @@ public class GameUI
 				a++;
 			}
 		}
+		_hintButton.setEnabled(enable);
+		_initializeButton.setEnabled(enable);
+		_solveButton.setEnabled(enable);
+		
 		_mainframe.repaint();
 	}
 
