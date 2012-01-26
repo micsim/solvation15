@@ -13,9 +13,8 @@ public class StartUp
 	public static void main(String[] args)
 	{
 		State data = new StateImpl();
-		//data.randomizeData();
 		
-		Algorithm alg = new AStar(new HeuristicManhattanImpl());
+		Algorithm alg = new LimitedAStar(new HeuristicManhattanImpl());
 		
 		GameWerkzeug _game = new GameWerkzeug(data, alg);
 	}
