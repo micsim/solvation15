@@ -59,26 +59,28 @@ public class StateImpl implements State, Cloneable{
 	
 	@Override
 	public boolean isSolvable(){	
-		byte [] hilfsarray = new byte[16];
 		int count = 0;
-		for(int i = 0; i < 16; i++)
-		{
-			hilfsarray[i] = _matrix[i%4][(i-(i%4))/4];
-		}
-		for(int j = 0; j < 16; j++)
-		{
-			for(int k = j; k < 16; k++)
-			{
-				if(hilfsarray[j] > hilfsarray[k])
-				{
+		
+		for(byte j=0; j<16; j++){
+			for(byte k=(byte) (j+1); k<16; k++){
+				if(_matrix[j%4][j/4] > _matrix[k%4][k/4]){
 					count++;
 				}
 			}
 		}
 		
-		byte[] pos16 = get16Position();
-		int bottom16 = 4 - pos16[0];		
-		return (bottom16%2 == 0 && count%2 == 1) || (bottom16%2 == 1 && count%2 == 0);
+//		if(count % 2 == 0)
+//			System.out.println("Count even.");
+//		else
+//			System.out.println("Count odd.");
+//		
+//		if(get16Position()[0] % 2 == 0){
+//			System.out.println("Even numbered position from button.");
+//		}else
+//			System.out.println("Odd numbered postion from button.");
+		
+		byte[] pos = get16Position();
+		return (count + pos[0] + pos[1])%2 == 0;
 	}
 
 	@Override
