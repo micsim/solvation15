@@ -44,4 +44,5 @@ public interface State
 	
 	public byte getNumberOfMisplacedTiles();
 	public int  getManhattanSum();
+	public boolean solveable();
 }

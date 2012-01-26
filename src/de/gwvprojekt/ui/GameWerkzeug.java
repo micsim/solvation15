@@ -40,8 +40,11 @@ public class GameWerkzeug
 						public void actionPerformed(ActionEvent e)
 						{
 							_data.initializeData();
-							_data.randomizeData(_random);
-							_ui.updateUI();
+							do
+							{
+								_data.randomizeData(_random);
+							}while(!_data.solveable());
+							_ui.updateUI(true);
 						}
 					});
 		
@@ -52,6 +55,7 @@ public class GameWerkzeug
 					@Override
 					public void actionPerformed(ActionEvent e)
 					{
+						_ui.updateUI(false);
 						try {
 							_alg.findPath(_data);
 						} catch (CloneNotSupportedException ex) {
@@ -66,7 +70,7 @@ public class GameWerkzeug
 						
 						_ui.getHintLabel().setText("Hint:");
 						_ui.getHintLabel2().setText(text);
-						_ui.updateUI();
+						_ui.updateUI(true);
 					}
 				});
 		
@@ -77,7 +81,7 @@ public class GameWerkzeug
 					@Override
 					public void actionPerformed(ActionEvent e)
 					{
-						
+						_ui.updateUI(false);
 						try {
 							_alg.findPath(_data);
 						} catch (CloneNotSupportedException ex) {
@@ -92,7 +96,7 @@ public class GameWerkzeug
 						
 						_ui.getHintLabel().setText("How to solve:");
 						_ui.getHintLabel2().setText(text);
-						_ui.updateUI();
+						_ui.updateUI(true);
 					}
 				});
 		
@@ -110,7 +114,7 @@ public class GameWerkzeug
 							byte row = (byte) (a/4);
 							
 							_data.move(row, column);
-							_ui.updateUI();
+							_ui.updateUI(true);
 						}
 					});
 		}
