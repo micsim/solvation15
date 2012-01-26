@@ -55,16 +55,18 @@ public class GameWerkzeug
 					@Override
 					public void actionPerformed(ActionEvent e)
 					{
-						String text = "";
-						
 						_ui.updateUI(false);
-						try {
+
+						String text = "";
+						try{
 							if(_alg.findPath(_data, 10))
 								text = _alg.getSolveString();
 							else
 								text = "Insolvable!";
-						} catch (CloneNotSupportedException ex) {
-							// TODO Auto-generated catch block
+						}catch(OutOfMemoryError ex){
+							text = "Could not solve: Algorithm ran out of memory.";
+						}catch(CloneNotSupportedException ex){
+							text = "Could not solve: Internal error.";
 							ex.printStackTrace();
 						}
 						
@@ -84,15 +86,18 @@ public class GameWerkzeug
 					@Override
 					public void actionPerformed(ActionEvent e)
 					{
-						String text = "";
 						_ui.updateUI(false);
-						try {
+						
+						String text = "";						
+						try{
 							if(_alg.findPath(_data))
 								text = _alg.getSolveString();
 							else
 								text = "Insolvable!";
-						} catch (CloneNotSupportedException ex) {
-							// TODO Auto-generated catch block
+						}catch(OutOfMemoryError ex){
+							text = "Could not solve: Algorithm ran out of memory.";
+						}catch(CloneNotSupportedException ex){
+							text = "Could not solve: Internal error.";
 							ex.printStackTrace();
 						}
 

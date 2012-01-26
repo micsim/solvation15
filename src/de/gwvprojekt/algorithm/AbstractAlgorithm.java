@@ -9,18 +9,29 @@ public abstract class AbstractAlgorithm implements Algorithm {
 	
 	public AbstractAlgorithm(Heuristic h){
 		heuristic = h;
+		directions = new byte[0];
 	}
 	
-	public boolean findPath(State start) throws CloneNotSupportedException{
+	public boolean findPath(State start) throws OutOfMemoryError, CloneNotSupportedException{
 		return findPath(start, 0);
 	}
 	
-	public boolean findPath(State startState, int depth) throws CloneNotSupportedException{
+	public boolean findPath(State startState, int depth) throws OutOfMemoryError, CloneNotSupportedException{
 		if(!startState.isSolvable())
 			return false;
 		
-		goalNode = getGoalNode(startState, depth);
-		calculateDirections();
+		try{
+			goalNode = getGoalNode(startState, depth);
+			calculateDirections();
+		}catch (OutOfMemoryError e){
+			goalNode = null;
+			directions = new byte[0];
+			throw(e);
+		}catch (CloneNotSupportedException e){
+			goalNode = null;
+			directions = new byte[0];
+			throw(e);
+		}
 		
 		return goalNode != null;
 	}
