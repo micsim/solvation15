@@ -5,7 +5,6 @@ import java.util.Random;
 public class StateImpl implements State, Cloneable{
 	// Felder
 	private int[][] _matrix;
-	private Random _random;
 	
 	/**
 	 * Konstruktor der Klasse DataImpl, die das Interface Data implementiert
@@ -13,13 +12,11 @@ public class StateImpl implements State, Cloneable{
 	public StateImpl()
 	{
 		_matrix = new int[4][4];
-		_random = new Random();
 		initializeData();
 	}
 	
 	public StateImpl(int[][] matrix){
 		_matrix = matrix;
-		_random = new Random();
 	}
 	
 	@Override
@@ -76,18 +73,18 @@ public class StateImpl implements State, Cloneable{
 		}
 	}
 	
-	public void randomizeData(){
-		_random.setSeed(System.nanoTime());
+	public void randomizeData(Random random){
+		random.setSeed(System.nanoTime());
 
 		int swapnumber = 50; 
 		for (int i = 0; i < swapnumber; i++)
 		{
 			int a1, a2, b1, b2;
 			do{
-				a1 = _random.nextInt(4);
-				a2 = _random.nextInt(4);
-				b1 = _random.nextInt(4);
-				b2 = _random.nextInt(4);
+				a1 = random.nextInt(4);
+				a2 = random.nextInt(4);
+				b1 = random.nextInt(4);
+				b2 = random.nextInt(4);
 			}while((a1==b1)&&(a2==b2));
 			
 			swap(a1,a2,b1,b2);

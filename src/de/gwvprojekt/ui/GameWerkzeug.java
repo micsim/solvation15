@@ -2,6 +2,7 @@ package de.gwvprojekt.ui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 import de.gwvprojekt.algorithm.Algorithm;
 import de.gwvprojekt.algorithm.State;
 
@@ -11,6 +12,7 @@ public class GameWerkzeug
 	private GameUI _ui;
 	private State _data;
 	private Algorithm _alg;
+	private Random _random;
 	
 	/**
 	 * Konstruktor der Klasse Gamewerkzeug
@@ -20,6 +22,7 @@ public class GameWerkzeug
 	{
 		_data = data;
 		_alg = alg;
+		_random = new Random();
 		_ui = new GameUI(_data);
 		addActions();
 	}
@@ -37,7 +40,7 @@ public class GameWerkzeug
 						public void actionPerformed(ActionEvent e)
 						{
 							_data.initializeData();
-							_data.randomizeData();
+							_data.randomizeData(_random);
 							_ui.updateUI();
 						}
 					});

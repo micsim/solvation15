@@ -1,12 +1,14 @@
 package de.gwvprojekt.algorithm;
 
+import java.util.Random;
+
 public interface State
 {
 	public abstract int   getValue(int row, int column);
 	public abstract int[] getPos(int value);
 	public abstract int[] getPossibleDirections();
 	
-	public void randomizeData();
+	public void randomizeData(Random random);
 	
 	/**
 	 * Liefert den String eines Matrixfeldes an der Stelle row, column
