@@ -191,6 +191,16 @@ public class StateImpl implements State, Cloneable{
 	}
 	
 	@Override
+	public int hashCode(){
+		int hash = 0;
+		for (byte i = 0; i < 4; i++)
+		{
+			hash = hash ^ ((int) _matrix[i][0]) ^ (((int) _matrix[i][1]) << 8) ^ (((int) _matrix[i][2]) << 16) ^ (((int) _matrix[i][3]) << 24);
+		}
+		return hash;
+	}
+	
+	@Override
 	public Object clone() throws CloneNotSupportedException{
 		byte[][] newMatrix = new byte[4][];
 		for(byte i=0;i<4;i++){
