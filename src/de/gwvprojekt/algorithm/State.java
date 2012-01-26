@@ -103,5 +103,4 @@ public interface State
 	 * @return int
 	 */
 	public int getManhattanSum();
-	public boolean solveable();
 }

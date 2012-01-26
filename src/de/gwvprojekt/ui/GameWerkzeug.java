@@ -45,7 +45,7 @@ public class GameWerkzeug
 							do
 							{
 								_data.randomizeData(_random);
-							}while(!_data.solveable());
+							}while(!_data.isSolvable());
 							_ui.updateUI(true);
 						}
 					});

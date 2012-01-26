@@ -313,36 +313,4 @@ public class StateImpl implements State, Cloneable{
 	{
 		return getPos((byte) 16);
 	}
-	
-	public boolean solveable()
-	{
-		int [] hilfsarray = new int[16];
-		int count = 0;
-		for(int i = 0; i < 16; i++)
-		{
-			hilfsarray[i] = _matrix[i%4][(i-(i%4))/4];
-		}
-		for(int j = 0; j < 16; j++)
-		{
-			for(int k = j; k < 16; k++)
-			{
-				if(hilfsarray[j] > hilfsarray[k])
-				{
-					count++;
-				}
-			}
-		}
-		// noch mal schaun, wie die funktion wirklich heißt!!!!
-		byte [] pos16 = get16Position();
-		int bottom16 = 4 - pos16[0];
-		if((bottom16%2 == 0 && count%2 == 1) || (bottom16%2 == 1 && count%2 == 0))
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-
 }
