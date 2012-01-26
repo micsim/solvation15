@@ -12,6 +12,9 @@ public abstract class AbstractAlgorithm implements Algorithm {
 	}
 	
 	public boolean findPath(State startState) throws CloneNotSupportedException{
+		if(!startState.isSolvable())
+			return false;
+		
 		goalNode = getGoalNode(startState);
 		calculateDirections();
 		

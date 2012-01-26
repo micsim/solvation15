@@ -34,6 +34,8 @@ public interface State
 	 * @return
 	 */
 	public boolean isMovable(byte row, byte column);
+	
+	public boolean isSolvable();
 
 	/**
 	 * Initialisiert die Matrix mit einer Permutation

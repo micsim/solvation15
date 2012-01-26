@@ -52,14 +52,17 @@ public class GameWerkzeug
 					@Override
 					public void actionPerformed(ActionEvent e)
 					{
+						String text = "";
+						
 						try {
-							_alg.findPath(_data);
+							if(_alg.findPath(_data))
+								text = _alg.getHintString();
+							else
+								text = "Insolvable!";
 						} catch (CloneNotSupportedException ex) {
 							// TODO Auto-generated catch block
 							ex.printStackTrace();
 						}
-
-						String text = _alg.getHintString();
 						
 						System.out.println("Hint:");
 						System.out.println(text);
@@ -77,16 +80,17 @@ public class GameWerkzeug
 					@Override
 					public void actionPerformed(ActionEvent e)
 					{
-						
+						String text = "";
 						try {
-							_alg.findPath(_data);
+							if(_alg.findPath(_data))
+								text = _alg.getSolveString();
+							else
+								text = "Insolvable!";
 						} catch (CloneNotSupportedException ex) {
 							// TODO Auto-generated catch block
 							ex.printStackTrace();
 						}
 
-						String text = _alg.getSolveString();
-						
 						System.out.println("How to solve:");
 						System.out.println(text);
 						

@@ -56,6 +56,30 @@ public class StateImpl implements State, Cloneable{
 		}
 		return result;
 	}
+	
+	@Override
+	public boolean isSolvable(){	
+		byte [] hilfsarray = new byte[16];
+		int count = 0;
+		for(int i = 0; i < 16; i++)
+		{
+			hilfsarray[i] = _matrix[i%4][(i-(i%4))/4];
+		}
+		for(int j = 0; j < 16; j++)
+		{
+			for(int k = j; k < 16; k++)
+			{
+				if(hilfsarray[j] > hilfsarray[k])
+				{
+					count++;
+				}
+			}
+		}
+		
+		byte[] pos16 = get16Position();
+		int bottom16 = 4 - pos16[0];		
+		return (bottom16%2 == 0 && count%2 == 1) || (bottom16%2 == 1 && count%2 == 0);
+	}
 
 	@Override
 	public void initializeData()
